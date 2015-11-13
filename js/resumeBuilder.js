@@ -1,3 +1,7 @@
+// In order to pass the JSONLint validation, all JSON has to use double quotes.
+// But for all the other JS codes, use single quotes will be better (for quoting HTML properties / attributes directly)
+// Inconsistency thus appearred.
+
 var bio = {
 	"name" : "Felix Li",
 	"role" : "Front-end Developer",
@@ -70,9 +74,9 @@ var work = {
 			"employer" : "GHJ Company",
 			"title" : "Junior Front-end Developer",
 			"location" : "Hong Kong",
-			"dates" : "20120701 - Now",
+			"dates" : "2012 - Now",
 			"description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer consectetur leo ex, eu elementum est auctor egestas. Praesent vehicula elit pretium dolor iaculis fermentum. Praesent interdum gravida velit, at tempus dolor iaculis eget. Donec ante orci, finibus eu libero id, mattis tempus sapien. Fusce dictum leo semper, convallis urna et, porttitor velit. Cras sagittis elit a quam vestibulum vehicula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec condimentum feugiat eros, eget ornare odio vehicula at. Donec varius leo id aliquam elementum. Vestibulum id eros laoreet, tempus ex eu, semper lorem. Vestibulum feugiat fringilla nisl id fermentum. Vestibulum ac dolor vehicula, pretium tellus ut, vehicula orci. Sed non faucibus erat. Nullam in odio metus. Morbi sed ante lacinia libero suscipit efficitur. Cras dignissim, diam a rutrum iaculis, massa lacus faucibus ex, vitae vestibulum mauris justo sed tellus."
-		}
+		},
 	]
 };
 
@@ -145,7 +149,13 @@ education.display = function () {
 };
 
 work.display = function () {
-
+	for (job in work.jobs) {
+		$('#workExperience').append(HTMLworkStart);
+		$('.work-entry:last').append(rep(HTMLworkEmployer, work.jobs[job].employer) + rep(HTMLworkTitle, work.jobs[job].title));
+		$('.work-entry:last').append(rep(HTMLworkDates, work.jobs[job].dates));
+		$('.work-entry:last').append(rep(HTMLworkLocation, work.jobs[job].location));
+		$('.work-entry:last').append(rep(HTMLworkDescription, work.jobs[job].description));
+	}
 };
 
 projects.display = function () {
@@ -153,3 +163,4 @@ projects.display = function () {
 };
 
 bio.display();
+work.display();
