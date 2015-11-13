@@ -10,16 +10,12 @@ var bio = {
 	},
 	"welcomeMessage": "Donec vel diam tempor mi feugiat bibendum nec id odio. Ut nec bibendum lorem. Etiam ultrices, risus nec blandit finibus, nisl purus fringilla metus, sit amet elementum nibh leo ac lorem. Morbi volutpat, diam sed porta iaculis, libero sapien feugiat lorem, eget consectetur dolor mauris consequat eros. Quisque bibendum, ante sed ultrices ultricies, eros ex elementum risus, id tincidunt libero purus sit amet quam. Nullam id ex eleifend, luctus lacus a, blandit nisl. Sed molestie, sapien at pharetra tincidunt, lectus augue dictum magna, non tempus ipsum sem id augue. Nulla luctus scelerisque mi, eu maximus metus eleifend ac.",
 	"skills" : [
-		"Graphic Design",
+		"Graphic Designing",
 		"HTML Coding",
 		"JavaScript Programming",
 		"Project Managing"
 	],
 	"biopic" : "http://lorempixel.com/400/400/people/"
-};
-
-bio.display = function () {
-
 };
 
 var education = {
@@ -68,10 +64,6 @@ var education = {
 	]
 };
 
-education.display = function () {
-
-};
-
 var work = {
 	"jobs" : [
 		{
@@ -82,10 +74,6 @@ var work = {
 			"description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer consectetur leo ex, eu elementum est auctor egestas. Praesent vehicula elit pretium dolor iaculis fermentum. Praesent interdum gravida velit, at tempus dolor iaculis eget. Donec ante orci, finibus eu libero id, mattis tempus sapien. Fusce dictum leo semper, convallis urna et, porttitor velit. Cras sagittis elit a quam vestibulum vehicula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec condimentum feugiat eros, eget ornare odio vehicula at. Donec varius leo id aliquam elementum. Vestibulum id eros laoreet, tempus ex eu, semper lorem. Vestibulum feugiat fringilla nisl id fermentum. Vestibulum ac dolor vehicula, pretium tellus ut, vehicula orci. Sed non faucibus erat. Nullam in odio metus. Morbi sed ante lacinia libero suscipit efficitur. Cras dignissim, diam a rutrum iaculis, massa lacus faucibus ex, vitae vestibulum mauris justo sed tellus."
 		}
 	]
-};
-
-work.display = function () {
-
 };
 
 var projects = {
@@ -129,6 +117,39 @@ var projects = {
 	]
 };
 
+//Replace '%data%' in src with str
+function rep(src, str) {
+	return src.replace('%data%', str);
+}
+
+bio.display = function () {
+	$('#header').prepend(rep(HTMLheaderRole, bio.role));
+	$('#header').prepend(rep(HTMLheaderName, bio.name));
+
+	$('#topContacts').append(rep(HTMLmobile, bio.contacts.mobile));
+	$('#topContacts').append(rep(HTMLemail, bio.contacts.email));
+	$('#topContacts').append(rep(HTMLtwitter, bio.contacts.twitter));
+	$('#topContacts').append(rep(HTMLgithub, bio.contacts.github));
+	$('#topContacts').append(rep(HTMLlocation, bio.contacts.location));
+
+	$('#header').append(rep(HTMLbioPic, bio.biopic));
+	$('#header').append(rep(HTMLwelcomeMsg, bio.welcomeMessage));
+	$('#header').append(HTMLskillsStart);
+	for (skill in bio.skills) {
+		$('#skills').append(rep(HTMLskills, bio.skills[skill]));
+	}
+};
+
+education.display = function () {
+
+};
+
+work.display = function () {
+
+};
+
 projects.display = function () {
 
 };
+
+bio.display();
