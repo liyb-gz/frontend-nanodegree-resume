@@ -145,7 +145,23 @@ bio.display = function () {
 };
 
 education.display = function () {
+	for (school in education.schools) {
+		$('#education').append(HTMLschoolStart);
+		$('.education-entry:last').append(rep(HTMLschoolName, education.schools[school].name) + rep(HTMLschoolDegree, education.schools[school].degree));
+		$('.education-entry:last').append(rep(HTMLschoolDates, education.schools[school].dates));
+		$('.education-entry:last').append(rep(HTMLschoolLocation, education.schools[school].location));
+		$('.education-entry:last').append(rep(HTMLschoolMajor, education.schools[school].majors));
+	}
 
+	if (education.onlineCourses.length > 0) {
+		$('#education').append(HTMLonlineClasses);
+		for (course in education.onlineCourses) {
+			$('#education').append(HTMLschoolStart);
+			$('.education-entry:last').append(rep(HTMLonlineTitle, education.onlineCourses[course].title) + rep(HTMLonlineSchool, education.onlineCourses[course].school));
+			$('.education-entry:last').append(rep(HTMLonlineDates, education.onlineCourses[course].date));
+			$('.education-entry:last').append(rep(HTMLonlineURL, education.onlineCourses[course].url));
+		}
+	}
 };
 
 work.display = function () {
@@ -165,12 +181,12 @@ projects.display = function () {
 		$('.project-entry:last').append(rep(HTMLprojectDates, projects.projects[project].dates));
 		$('.project-entry:last').append(rep(HTMLprojectDescription, projects.projects[project].description));
 		for (image in projects.projects[project].images) {
-			console.log('image:' + image);
 			$('.project-entry:last').append(rep(HTMLprojectImage, projects.projects[project].images[image]));
 		}
 	}
 };
 
 bio.display();
+education.display();
 work.display();
 projects.display();
