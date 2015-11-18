@@ -77,6 +77,13 @@ var work = {
 			"dates" : "2012 - Now",
 			"description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer consectetur leo ex, eu elementum est auctor egestas. Praesent vehicula elit pretium dolor iaculis fermentum. Praesent interdum gravida velit, at tempus dolor iaculis eget. Donec ante orci, finibus eu libero id, mattis tempus sapien. Fusce dictum leo semper, convallis urna et, porttitor velit. Cras sagittis elit a quam vestibulum vehicula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec condimentum feugiat eros, eget ornare odio vehicula at. Donec varius leo id aliquam elementum. Vestibulum id eros laoreet, tempus ex eu, semper lorem. Vestibulum feugiat fringilla nisl id fermentum. Vestibulum ac dolor vehicula, pretium tellus ut, vehicula orci. Sed non faucibus erat. Nullam in odio metus. Morbi sed ante lacinia libero suscipit efficitur. Cras dignissim, diam a rutrum iaculis, massa lacus faucibus ex, vitae vestibulum mauris justo sed tellus."
 		},
+		{
+			"employer" : "GHJ Company",
+			"title" : "Junior Front-end Developer",
+			"location" : "Guangzhou",
+			"dates" : "2012 - Now",
+			"description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer consectetur leo ex, eu elementum est auctor egestas. Praesent vehicula elit pretium dolor iaculis fermentum. Praesent interdum gravida velit, at tempus dolor iaculis eget. Donec ante orci, finibus eu libero id, mattis tempus sapien. Fusce dictum leo semper, convallis urna et, porttitor velit. Cras sagittis elit a quam vestibulum vehicula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec condimentum feugiat eros, eget ornare odio vehicula at. Donec varius leo id aliquam elementum. Vestibulum id eros laoreet, tempus ex eu, semper lorem. Vestibulum feugiat fringilla nisl id fermentum. Vestibulum ac dolor vehicula, pretium tellus ut, vehicula orci. Sed non faucibus erat. Nullam in odio metus. Morbi sed ante lacinia libero suscipit efficitur. Cras dignissim, diam a rutrum iaculis, massa lacus faucibus ex, vitae vestibulum mauris justo sed tellus."
+		}
 	]
 };
 
@@ -186,7 +193,12 @@ projects.display = function () {
 	}
 };
 
+function googleMapDisplay() {
+	$('#mapDiv').append(googleMap);
+}
+
 bio.display();
 education.display();
 work.display();
 projects.display();
+googleMapDisplay();
