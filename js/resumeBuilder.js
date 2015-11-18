@@ -10,7 +10,7 @@ var bio = {
 		"email" : "liyb.gz@gmail.com",
 		"github" : "https://github.com/liyb-gz",
 		"twitter" : "LiybGz",
-		"location" : "Hong Kong"
+		"location" : "Shanghai"
 	},
 	"welcomeMessage": "Donec vel diam tempor mi feugiat bibendum nec id odio. Ut nec bibendum lorem. Etiam ultrices, risus nec blandit finibus, nisl purus fringilla metus, sit amet elementum nibh leo ac lorem. Morbi volutpat, diam sed porta iaculis, libero sapien feugiat lorem, eget consectetur dolor mauris consequat eros. Quisque bibendum, ante sed ultrices ultricies, eros ex elementum risus, id tincidunt libero purus sit amet quam. Nullam id ex eleifend, luctus lacus a, blandit nisl. Sed molestie, sapien at pharetra tincidunt, lectus augue dictum magna, non tempus ipsum sem id augue. Nulla luctus scelerisque mi, eu maximus metus eleifend ac.",
 	"skills" : [
@@ -76,13 +76,6 @@ var work = {
 			"location" : "Hong Kong",
 			"dates" : "2012 - Now",
 			"description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer consectetur leo ex, eu elementum est auctor egestas. Praesent vehicula elit pretium dolor iaculis fermentum. Praesent interdum gravida velit, at tempus dolor iaculis eget. Donec ante orci, finibus eu libero id, mattis tempus sapien. Fusce dictum leo semper, convallis urna et, porttitor velit. Cras sagittis elit a quam vestibulum vehicula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec condimentum feugiat eros, eget ornare odio vehicula at. Donec varius leo id aliquam elementum. Vestibulum id eros laoreet, tempus ex eu, semper lorem. Vestibulum feugiat fringilla nisl id fermentum. Vestibulum ac dolor vehicula, pretium tellus ut, vehicula orci. Sed non faucibus erat. Nullam in odio metus. Morbi sed ante lacinia libero suscipit efficitur. Cras dignissim, diam a rutrum iaculis, massa lacus faucibus ex, vitae vestibulum mauris justo sed tellus."
-		},
-		{
-			"employer" : "GHJ Company",
-			"title" : "Junior Front-end Developer",
-			"location" : "Guangzhou",
-			"dates" : "2012 - Now",
-			"description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer consectetur leo ex, eu elementum est auctor egestas. Praesent vehicula elit pretium dolor iaculis fermentum. Praesent interdum gravida velit, at tempus dolor iaculis eget. Donec ante orci, finibus eu libero id, mattis tempus sapien. Fusce dictum leo semper, convallis urna et, porttitor velit. Cras sagittis elit a quam vestibulum vehicula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec condimentum feugiat eros, eget ornare odio vehicula at. Donec varius leo id aliquam elementum. Vestibulum id eros laoreet, tempus ex eu, semper lorem. Vestibulum feugiat fringilla nisl id fermentum. Vestibulum ac dolor vehicula, pretium tellus ut, vehicula orci. Sed non faucibus erat. Nullam in odio metus. Morbi sed ante lacinia libero suscipit efficitur. Cras dignissim, diam a rutrum iaculis, massa lacus faucibus ex, vitae vestibulum mauris justo sed tellus."
 		}
 	]
 };
@@ -128,20 +121,26 @@ var projects = {
 	]
 };
 
-//Replace '%data%' in src with str
+// Replace '%data%' in src with str
+// Function created for convenience; as all placeholders are '%data%'
 function rep(src, str) {
 	return src.replace('%data%', str);
+}
+
+function displayContact(place) {
+	place.append(rep(HTMLmobile, bio.contacts.mobile));
+	place.append(rep(HTMLemail, bio.contacts.email));
+	place.append(rep(HTMLtwitter, bio.contacts.twitter));
+	place.append(rep(HTMLgithub, bio.contacts.github));
+	place.append(rep(HTMLlocation, bio.contacts.location));
 }
 
 bio.display = function () {
 	$('#header').prepend(rep(HTMLheaderRole, bio.role));
 	$('#header').prepend(rep(HTMLheaderName, bio.name));
 
-	$('#topContacts').append(rep(HTMLmobile, bio.contacts.mobile));
-	$('#topContacts').append(rep(HTMLemail, bio.contacts.email));
-	$('#topContacts').append(rep(HTMLtwitter, bio.contacts.twitter));
-	$('#topContacts').append(rep(HTMLgithub, bio.contacts.github));
-	$('#topContacts').append(rep(HTMLlocation, bio.contacts.location));
+	displayContact($('#topContacts'));
+	displayContact($('#footerContacts'));
 
 	$('#header').append(rep(HTMLbioPic, bio.biopic));
 	$('#header').append(rep(HTMLwelcomeMsg, bio.welcomeMessage));
@@ -193,12 +192,10 @@ projects.display = function () {
 	}
 };
 
-function googleMapDisplay() {
-	$('#mapDiv').append(googleMap);
-}
+// Where shall I "encapsulate" this?
+$('#mapDiv').append(googleMap);
 
 bio.display();
 education.display();
 work.display();
 projects.display();
-googleMapDisplay();
