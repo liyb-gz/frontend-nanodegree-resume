@@ -145,13 +145,13 @@ bio.display = function () {
 	$('#header').append(rep(HTMLbioPic, bio.biopic));
 	$('#header').append(rep(HTMLwelcomeMsg, bio.welcomeMessage));
 	$('#header').append(HTMLskillsStart);
-	for (skill in bio.skills) {
+	for (var skill in bio.skills) {
 		$('#skills').append(rep(HTMLskills, bio.skills[skill]));
 	}
 };
 
 education.display = function () {
-	for (school in education.schools) {
+	for (var school in education.schools) {
 		$('#education').append(HTMLschoolStart);
 		$('.education-entry:last').append(rep(HTMLschoolName, education.schools[school].name) + rep(HTMLschoolDegree, education.schools[school].degree));
 		$('.education-entry:last').append(rep(HTMLschoolDates, education.schools[school].dates));
@@ -161,7 +161,7 @@ education.display = function () {
 
 	if (education.onlineCourses.length > 0) {
 		$('#education').append(HTMLonlineClasses);
-		for (course in education.onlineCourses) {
+		for (var course in education.onlineCourses) {
 			$('#education').append(HTMLschoolStart);
 			$('.education-entry:last').append(rep(HTMLonlineTitle, education.onlineCourses[course].title) + rep(HTMLonlineSchool, education.onlineCourses[course].school));
 			$('.education-entry:last').append(rep(HTMLonlineDates, education.onlineCourses[course].date));
@@ -171,7 +171,7 @@ education.display = function () {
 };
 
 work.display = function () {
-	for (job in work.jobs) {
+	for (var job in work.jobs) {
 		$('#workExperience').append(HTMLworkStart);
 		$('.work-entry:last').append(rep(HTMLworkEmployer, work.jobs[job].employer) + rep(HTMLworkTitle, work.jobs[job].title));
 		$('.work-entry:last').append(rep(HTMLworkDates, work.jobs[job].dates));
@@ -181,12 +181,12 @@ work.display = function () {
 };
 
 projects.display = function () {
-	for (project in projects.projects) {
+	for (var project in projects.projects) {
 		$('#projects').append(HTMLprojectStart);
 		$('.project-entry:last').append(rep(HTMLprojectTitle, projects.projects[project].title));
 		$('.project-entry:last').append(rep(HTMLprojectDates, projects.projects[project].dates));
 		$('.project-entry:last').append(rep(HTMLprojectDescription, projects.projects[project].description));
-		for (image in projects.projects[project].images) {
+		for (var image in projects.projects[project].images) {
 			$('.project-entry:last').append(rep(HTMLprojectImage, projects.projects[project].images[image]));
 		}
 	}
