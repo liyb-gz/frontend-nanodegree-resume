@@ -23,8 +23,7 @@ var bio = {
 };
 
 var education = {
-	"schools" : [
-		{
+	"schools" : [{
 			"name" : "ABC University",
 			"location" : "Guangzhou",
 			"degree" : "Bachelor of Engineering",
@@ -46,8 +45,7 @@ var education = {
 			"url" : "http://www.xyzu.hk"
 		}
 	],
-	"onlineCourses" : [
-		{
+	"onlineCourses" : [{
 			"title" : "Coursera Specialization: Learn to Program and Analyze Data with Python",
 			"school" : "University of Michigan",
 			"date": 20130124,
@@ -69,8 +67,7 @@ var education = {
 };
 
 var work = {
-	"jobs" : [
-		{
+	"jobs" : [{
 			"employer" : "GHJ Company",
 			"title" : "Junior Front-end Developer",
 			"location" : "Hong Kong",
@@ -127,7 +124,7 @@ function rep(src, str) {
 	return src.replace('%data%', str);
 }
 
-function displayContact(place) {
+bio.displayContact = function (place) {
 	place.append(rep(HTMLmobile, bio.contacts.mobile));
 	place.append(rep(HTMLemail, bio.contacts.email));
 	place.append(rep(HTMLtwitter, bio.contacts.twitter));
@@ -139,63 +136,69 @@ bio.display = function () {
 	$('#header').prepend(rep(HTMLheaderRole, bio.role));
 	$('#header').prepend(rep(HTMLheaderName, bio.name));
 
-	displayContact($('#topContacts'));
-	displayContact($('#footerContacts'));
+	bio.displayContact($('#topContacts'));
+	bio.displayContact($('#footerContacts'));
 
 	$('#header').append(rep(HTMLbioPic, bio.biopic));
 	$('#header').append(rep(HTMLwelcomeMsg, bio.welcomeMessage));
 	$('#header').append(HTMLskillsStart);
-	for (var skill in bio.skills) {
-		$('#skills').append(rep(HTMLskills, bio.skills[skill]));
-	}
+
+	bio.skills.forEach( function(skill) {
+		$('#skills').append(rep(HTMLskills, skill));
+	});
 };
 
 education.display = function () {
-	for (var school in education.schools) {
+	education.schools.forEach( function(school) {
 		$('#education').append(HTMLschoolStart);
-		$('.education-entry:last').append(rep(HTMLschoolName, education.schools[school].name) + rep(HTMLschoolDegree, education.schools[school].degree));
-		$('.education-entry:last').append(rep(HTMLschoolDates, education.schools[school].dates));
-		$('.education-entry:last').append(rep(HTMLschoolLocation, education.schools[school].location));
-		$('.education-entry:last').append(rep(HTMLschoolMajor, education.schools[school].majors));
-	}
+		$('.education-entry:last').append(rep(HTMLschoolName, school.name) + rep(HTMLschoolDegree, school.degree));
+		$('.education-entry:last').append(rep(HTMLschoolDates, school.dates));
+		$('.education-entry:last').append(rep(HTMLschoolLocation, school.location));
+		$('.education-entry:last').append(rep(HTMLschoolMajor, school.majors));
+	});
 
 	if (education.onlineCourses.length > 0) {
 		$('#education').append(HTMLonlineClasses);
-		for (var course in education.onlineCourses) {
+		education.onlineCourses.forEach( function(course) {
 			$('#education').append(HTMLschoolStart);
-			$('.education-entry:last').append(rep(HTMLonlineTitle, education.onlineCourses[course].title) + rep(HTMLonlineSchool, education.onlineCourses[course].school));
-			$('.education-entry:last').append(rep(HTMLonlineDates, education.onlineCourses[course].date));
-			$('.education-entry:last').append(rep(HTMLonlineURL, education.onlineCourses[course].url));
-		}
+			$('.education-entry:last').append(rep(HTMLonlineTitle, course.title) + rep(HTMLonlineSchool, course.school));
+			$('.education-entry:last').append(rep(HTMLonlineDates, course.date));
+			$('.education-entry:last').append(rep(HTMLonlineURL, course.url));
+		});
 	}
 };
 
 work.display = function () {
-	for (var job in work.jobs) {
+	work.jobs.forEach( function(job) {
 		$('#workExperience').append(HTMLworkStart);
-		$('.work-entry:last').append(rep(HTMLworkEmployer, work.jobs[job].employer) + rep(HTMLworkTitle, work.jobs[job].title));
-		$('.work-entry:last').append(rep(HTMLworkDates, work.jobs[job].dates));
-		$('.work-entry:last').append(rep(HTMLworkLocation, work.jobs[job].location));
-		$('.work-entry:last').append(rep(HTMLworkDescription, work.jobs[job].description));
-	}
+		$('.work-entry:last').append(rep(HTMLworkEmployer, job.employer) + rep(HTMLworkTitle, job.title));
+		$('.work-entry:last').append(rep(HTMLworkDates, job.dates));
+		$('.work-entry:last').append(rep(HTMLworkLocation, job.location));
+		$('.work-entry:last').append(rep(HTMLworkDescription, job.description));
+	});
 };
 
 projects.display = function () {
-	for (var project in projects.projects) {
+	projects.projects.forEach( function(project) {
 		$('#projects').append(HTMLprojectStart);
-		$('.project-entry:last').append(rep(HTMLprojectTitle, projects.projects[project].title));
-		$('.project-entry:last').append(rep(HTMLprojectDates, projects.projects[project].dates));
-		$('.project-entry:last').append(rep(HTMLprojectDescription, projects.projects[project].description));
-		for (var image in projects.projects[project].images) {
-			$('.project-entry:last').append(rep(HTMLprojectImage, projects.projects[project].images[image]));
-		}
-	}
+		$('.project-entry:last').append(rep(HTMLprojectTitle, project.title));
+		$('.project-entry:last').append(rep(HTMLprojectDates, project.dates));
+		$('.project-entry:last').append(rep(HTMLprojectDescription, project.description));
+		project.images.forEach ( function(image) {
+			$('.project-entry:last').append(rep(HTMLprojectImage, image));
+		});
+	});
 };
 
 // Where shall I "encapsulate" this?
-$('#mapDiv').append(googleMap);
+var map = {
+	"display": function () {
+		$('#mapDiv').append(googleMap);
+	}
+};
 
 bio.display();
 education.display();
 work.display();
 projects.display();
+map.display();
